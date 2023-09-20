@@ -10,10 +10,11 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 /**
- * struct ls_t - struct type defining a linked list
+ * struct list_t - struct type defining a linked list
  * @drc: A directory path
  * @next: A pointer to another struct list_t
  */
+
 typedef struct list_t
 {
 	char *drc;
