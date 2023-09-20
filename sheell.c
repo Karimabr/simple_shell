@@ -1,4 +1,5 @@
-#include "xyshell.h"
+#include "sheell.h"
+
 
 	char **commands = NULL;
 	char *line = NULL;
@@ -6,13 +7,15 @@
 	int status = 0;
 
 /**
- * main - Shell's main code
- * @argc: Arguments' number
- * @argv: Arguments's progm
- * Return: success = 0 , fail = error
+ * main - This is the main shell code
+ * @argc: ARGUMENTS' number
+ * @argv: ARGUMENTS
+ * Prints error on Failure
+ * Return: 0 means  success
  */
 
-	int main(int argc __attribute__((unused)), char **argv)
+
+int main(int argc __attribute__((unused)), char **argv)
 {
 	char **current_command = NULL;
 	int i, type_command = 0;
@@ -22,7 +25,7 @@
 	shell_name = argv[0];
 	while (1)
 	{
-		xy_function();
+		non_interactive();
 		print(" ($) ", STDOUT_FILENO);
 		if (getline(&line, &n, stdin) == -1)
 		{

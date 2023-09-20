@@ -1,8 +1,8 @@
-#ifndef XYSHELL_H
-#define XYSHELL_H
+#ifndef SHEELL_H
+#define SHEELL_H
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -12,24 +12,26 @@
 #include <dirent.h>
 #include <signal.h>
 
+
 /*constants*/
-#define EXTL_CMD 1
-#define INTL_CMD 2
-#define PTH_CMD 3
-#define INVLD_CMD -1
+#define EXTERNAL_COMMAND 1
+#define INTERNAL_COMMAND 2
+#define PATH_COMMAND 3
+#define INVALID_COMMAND -1
 
 #define min(x, y) (((x) < (y)) ? (x) : (y))
 
 /**
- *struct map - Structure to map a command name to a function
- *@cmd_name: Command's name
- *@funcy: the function that executes the command
+ *struct map - a struct that maps a command name to a function
+ *
+ *@command_name: name of the command
+ *@func: the function that executes the command
  */
 
 typedef struct map
 {
-	char *cmd_name;
-	void (*funcy)(char **cmd);
+	char *command_name;
+	void (*func)(char **command);
 } function_map;
 
 extern char **environ;
@@ -38,41 +40,38 @@ extern char **commands;
 extern char *shell_name;
 extern int status;
 
-/*xymakers*/
+/*A_built*/
+void print(char *, int);
+void Aenv(char **);
+void Aquit(char **);
+int _atoi(char *);
+
+/*B_helper*/
 void print(char *, int);
 char **tokenizer(char *, char *);
 void remove_newline(char *);
 int _strlen(char *);
 void _strcpy(char *, char *);
-
-/*xymakers2*/
 int _strcmp(char *, char *);
 char *_strcat(char *, char *);
 int _strspn(char *, char *);
 int _strcspn(char *, char *);
 char *_strchr(char *, char);
-
-/*xymakers3*/
 char *_strtok_r(char *, char *, char **);
 int _atoi(char *);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void ctrl_c_handler(int);
 void remove_comment(char *);
 
-/*utils*/
+/*C_util*/
 int parse_command(char *);
 void execute_command(char **, int);
 char *check_path(char *);
 void (*get_func(char *))(char **);
 char *_getenv(char *);
 
-/*built_in*/
-void env(char **);
-void quit(char **);
-
 /*main*/
-extern void xy_function(void);
+extern void non_interactive(void);
 extern void initializer(char **current_command, int type_command);
 
-#endif /*XYSHELL_H*/
-
+#endif /*SHEELL_H*/
